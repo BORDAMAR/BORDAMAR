@@ -1,0 +1,86 @@
+@font-face 
+  font-family: ACaslonPro-Bold
+  src: url("/public/fonts/ACaslonPro-Bold.otf")
+
+@font-face 
+  font-family: ACaslonPro-BoldItalic
+  src: url("/public/fonts/ACaslonPro-BoldItalic.otf")
+
+@font-face 
+  font-family: ACaslonPro-Italic
+  src: url("/public/fonts/ACaslonPro-Italic.otf")
+
+@font-face 
+  font-family: ACaslonPro-Regular
+  src: url("/public/fonts/ACaslonPro-Regular.otf")
+
+@font-face 
+  font-family: ACaslonPro-Semibold
+  src: url("/public/fonts/ACaslonPro-Semibold.otf")
+
+@font-face 
+  font-family: ACaslonPro-SemiboldItalic
+  src: url("/public/fonts/ACaslonPro-SemiboldItalic.otf")
+
+.centro
+  width: 100%
+  display: block
+  margin: 0 auto
+
+.textocentro
+  display: flex
+  justify-content: center
+
+.fuente_menu 
+  font-family: ACaslonPro-BoldItalic
+  color: #000000
+  font-size: 17px
+
+.linea_animacion
+  text-decoration: none 
+  position: relative
+  
+.linea_animacion:after 
+  content: ''
+  position: absolute
+  width: 100%
+  transform: scaleX(0)
+  height: 2px
+  bottom: 0
+  left: 0
+  background-color: #000000
+  transform-origin: bottom right
+  transition: transform 0.25s ease-out
+
+
+.linea_animacion:hover:after 
+  transform: scaleX(1)
+  transform-origin: bottom left
+
+.fuente_tel
+  font-family: ACaslonPro-SemiboldItalic
+  color: #000000
+  font-size: 22px
+  padding-top: 15%
+
+.medidas_tel
+  width: 15%
+  padding-top: 10%
+
+
+.medidas_imagen1
+  width: 50%
+
+.encabezado1
+  font-family: ACaslonPro-SemiboldItalic
+  font-size: 30px
+  
+  
+.fuenteparrafo1
+  font-family: ACaslonPro-Regular
+  text-align: justify
+  font-size: 20px  
+  
+.altomapa
+  padding: 20%
+
