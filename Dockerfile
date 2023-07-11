@@ -1,37 +1,24 @@
+# CARGAMOS IMAGEN DE PHP MODO ALPINE SUPER REDUCIDA
+FROM elrincondeisma/octane:latest
 
-name: Docker Image CI
+RUN curl -sS https://getcomposer.org/installer​ | php -- \
+     --install-dir=/usr/local/bin --filename=composer
 
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=spiralscout/roadrunner:2.4.2 /usr/bin/rr /usr/bin/rr
 
-jobs:
+WORKDIR /app
+COPY . .
+RUN rm -rf /app/vendor
+RUN rm -rf /app/composer.lock
+RUN composer install
+RUN composer require laravel/octane spiral/roadrunner
+COPY .env.example .env
+RUN mkdir -p /app/storage/logs
+RUN php artisan cache:clear
+RUN php artisan view:clear
+RUN php artisan config:clear
+RUN php artisan octane:install --server="swoole"
+CMD php artisan octane:start --server="swoole" --host="0.0.0.0"
 
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout 
-        uses: actions/checkout@v2
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@master
-        with:
-          platforms: all
-      - name: Login to Docker Hub
-        uses: docker/login-action@v1
-        with:
-          username: ${{ secrets.DOCKER_HUB_USERNAME }}
-          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v1
-      - name: Build and push
-        uses: docker/build-push-action@v2
-        with:
-          context: .
-          file: ./Dockerfile
-          platforms: linux/amd64,linux/arm64
-          push: true
-          tags: ${{ secrets.DOCKER_HUB_USERNAME }}/bordamar:latest
+EXPOSE 8000
