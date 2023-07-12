@@ -12,8 +12,7 @@ RUN rm -rf /app/vendor
 RUN rm -rf /app/composer.lock
 RUN composer install
 RUN composer require laravel/octane
-RUN composer require roadrunner-server/roadrunner:v2.0 nyholm/psr7
-COPY ./vendor/bin/rr get-binary
+RUN composer require roadrunner-server/roadrunner:v2.0 nyholm/psr7 ./vendor/bin/rr get-binary
 COPY .env.example .env
 RUN mkdir -p /app/storage/logs
 RUN php artisan cache:clear
