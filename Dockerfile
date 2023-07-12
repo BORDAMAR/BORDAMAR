@@ -1,5 +1,5 @@
 # CARGAMOS IMAGEN DE PHP MODO ALPINE SUPER REDUCIDA
-FROM php:8.2-fpm-alpine
+FROM php:8.2-fpm-alpine/octane:latest
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 COPY --from=spiralscout/roadrunner:2.4.2 /usr/bin/rr /usr/bin/rr
