@@ -2,6 +2,7 @@
 FROM php:8.2-fpm-alpine
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+COPY --from=spiralscout/roadrunner:2.4.2 /usr/bin/rr /usr/bin/rr
 
 WORKDIR /app
 COPY . .
