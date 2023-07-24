@@ -20,5 +20,4 @@ export default defineConfig({
             refresh: true,
         }),
     ],
-    base:'https://BORDAMAR.github.io/BORDAMAR/',
 });
